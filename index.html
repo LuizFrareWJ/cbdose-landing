@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBDose — EurON Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#06120e;
+    --bg-2:#0a1a14;
+    --panel:#0d211a;
+    --panel-2:#102a21;
+    --line:rgba(255,255,255,.07);
+    --green:#1ed98f;
+    --green-2:#13b87a;
+    --green-soft:rgba(30,217,143,.12);
+    --text:#e6efe9;
+    --muted:#8aa399;
+    --muted-2:#6d877d;
+    --radius:18px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(30,217,143,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(30,217,143,.06), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .accent{color:var(--green)}
+  .eyebrow{
+    font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--green);margin-bottom:14px;
+  }
+  section{padding:88px 0}
+  h2.section-title{font-size:clamp(26px,3.4vw,40px);font-weight:800;line-height:1.2;letter-spacing:-.01em}
+  .section-head{text-align:center;max-width:680px;margin:0 auto 56px}
+  .section-head p{color:var(--muted);margin-top:16px;font-size:16px}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;
+    padding:14px 26px;border-radius:999px;border:1px solid transparent;cursor:pointer;
+    transition:transform .15s ease, box-shadow .2s ease, background .2s ease;white-space:nowrap}
+  .btn-primary{background:linear-gradient(95deg,var(--green),var(--green-2));color:#04140d;
+    box-shadow:0 10px 30px -10px rgba(30,217,143,.6)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px -12px rgba(30,217,143,.75)}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:rgba(30,217,143,.5);background:var(--green-soft)}
+  .btn .arrow{transition:transform .15s ease}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  /* Header */
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+    background:rgba(6,18,14,.72);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:baseline;gap:7px;font-weight:800;font-size:22px;letter-spacing:.02em}
+  .logo small{font-size:12px;font-weight:600;color:var(--green);background:var(--green-soft);
+    padding:3px 8px;border-radius:6px}
+  .nav-menu{display:flex;gap:34px;font-size:14px;color:var(--muted);font-weight:500}
+  .nav-menu a:hover{color:var(--text)}
+  .nav-right{display:flex;align-items:center;gap:20px;font-size:14px;color:var(--muted)}
+  .nav-right .lang{display:flex;align-items:center;gap:6px}
+
+  /* Hero */
+  .hero{padding-top:64px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(34px,4.6vw,56px);font-weight:800;line-height:1.08;letter-spacing:-.02em}
+  .hero p.lead{color:var(--muted);margin:22px 0 30px;font-size:17px;max-width:480px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-checks{display:flex;gap:26px;flex-wrap:wrap;margin-top:30px;font-size:13.5px;color:var(--muted)}
+  .hero-checks span{display:inline-flex;align-items:center;gap:8px}
+  .check{width:18px;height:18px;border-radius:50%;background:var(--green-soft);
+    display:inline-grid;place-items:center;flex:none}
+  .check svg{width:11px;height:11px;stroke:var(--green)}
+
+  .hero-visual{position:relative;border-radius:24px;overflow:hidden;min-height:420px;
+    background:
+      radial-gradient(120% 120% at 70% 20%, rgba(30,217,143,.22), transparent 55%),
+      linear-gradient(160deg,#0a2018,#06120e);
+    border:1px solid var(--line);display:grid;place-items:center}
+  .drop{width:150px;height:200px;filter:drop-shadow(0 20px 40px rgba(30,217,143,.35))}
+  .hero-badge{position:absolute;left:24px;bottom:24px;display:flex;align-items:center;gap:12px;
+    background:rgba(8,22,17,.85);border:1px solid var(--line);backdrop-filter:blur(8px);
+    padding:12px 16px;border-radius:14px;font-size:13px}
+  .hero-badge .ic{width:34px;height:34px;border-radius:9px;background:var(--green-soft);
+    display:grid;place-items:center;color:var(--green);flex:none}
+  .hero-badge b{display:block;font-weight:600}
+  .hero-badge small{color:var(--muted)}
+
+  /* Partners */
+  .partners{text-align:center}
+  .partners .section-head{margin-bottom:40px}
+  .partner-logos{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+  .partner{flex:1;min-width:200px;max-width:330px;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:26px;display:grid;place-items:center;font-weight:700;font-size:22px;
+    letter-spacing:.02em;color:#cfe0d8}
+
+  /* Features */
+  .features{background:linear-gradient(180deg,transparent,rgba(10,26,20,.5),transparent)}
+  .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+    transition:transform .2s ease,border-color .2s ease}
+  .card:hover{transform:translateY(-4px);border-color:rgba(30,217,143,.35)}
+  .card .ic{width:42px;height:42px;border-radius:11px;background:var(--green-soft);color:var(--green);
+    display:grid;place-items:center;margin-bottom:18px}
+  .card h3{font-size:16px;font-weight:600;margin-bottom:8px}
+  .card p{font-size:13.5px;color:var(--muted)}
+  .center-cta{text-align:center;margin-top:44px}
+  .center-cta small{display:block;color:var(--muted-2);font-size:12.5px;margin-top:14px}
+
+  /* Technical info */
+  .tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .molecule{border-radius:22px;border:1px solid var(--line);min-height:360px;
+    background:radial-gradient(100% 100% at 30% 30%, rgba(30,217,143,.18), transparent 60%),
+      linear-gradient(160deg,#0a2018,#05100c);display:grid;place-items:center}
+  .conc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
+  .conc{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:16px 14px}
+  .conc b{font-size:18px;font-weight:700;color:var(--green)}
+  .conc b span{font-size:12px;color:var(--muted);font-weight:500}
+  .conc small{display:block;color:var(--muted-2);font-size:11px;margin-top:6px;letter-spacing:.04em}
+
+  /* Coverage */
+  .coverage-card{background:linear-gradient(160deg,var(--panel),#081711);border:1px solid var(--line);
+    border-radius:24px;padding:48px;display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+  .coverage-card .lead{color:var(--muted);margin:18px 0 28px;font-size:15.5px}
+  .check-list{display:grid;gap:14px}
+  .check-list span{display:flex;align-items:center;gap:11px;font-size:14.5px;color:var(--text)}
+  .coverage-foot{display:flex;gap:30px;flex-wrap:wrap;margin-top:26px;font-size:13px;color:var(--muted)}
+  .coverage-foot span{display:inline-flex;align-items:center;gap:8px}
+
+  /* FAQ */
+  .faq{max-width:840px;margin:0 auto}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;
+    padding:0 22px;transition:border-color .2s ease}
+  details[open]{border-color:rgba(30,217,143,.3)}
+  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+    gap:16px;padding:20px 0;font-weight:500;font-size:15.5px}
+  summary::-webkit-details-marker{display:none}
+  summary .chev{flex:none;transition:transform .2s ease;color:var(--green)}
+  details[open] summary .chev{transform:rotate(180deg)}
+  details p{color:var(--muted);font-size:14px;padding:0 0 22px;max-width:680px}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+  .foot-grid p{color:var(--muted);font-size:13.5px;margin-top:16px;max-width:320px}
+  .foot-col h4{font-size:13px;font-weight:600;margin-bottom:16px}
+  .foot-col a{display:block;color:var(--muted);font-size:13.5px;margin-bottom:10px}
+  .foot-col a:hover{color:var(--green)}
+  .foot-bottom{border-top:1px solid var(--line);margin-top:40px;padding-top:24px;display:flex;
+    justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted-2);font-size:12.5px}
+  .foot-bottom .links{display:flex;gap:22px}
+
+  /* Responsive */
+  @media (max-width:980px){
+    .hero-grid,.tech-grid,.coverage-card{grid-template-columns:1fr}
+    .feature-grid{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .coverage-card{padding:32px}
+  }
+  @media (max-width:640px){
+    section{padding:60px 0}
+    .nav-menu,.nav-right .lang,.nav-right a.login{display:none}
+    .feature-grid,.conc-grid{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .foot-bottom{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>CBDose:<br>Cálculo Posológico<br><span class="accent">Prático e Seguro</span><br>para Prescrição<br>de Canabidiol</h1>
+      <p class="lead">Simplifique a prescrição de <b>Canabidiol</b> com segurança científica. A CBDose é uma ferramenta digital exclusiva para médicos, projetada para simplificar e dar precisão à titulação de <b>doses de CBD</b>.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#">Acessar a Plataforma <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="#recursos">Conheça as Ferramentas</a>
+      </div>
+      <div class="hero-checks">
+        <span><i class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></i> Exclusivo para Profissionais e Acadêmicos da Saúde</span>
+        <span><i class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></i> 100% Gratuito</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <svg class="drop" viewBox="0 0 100 140">
+        <defs>
+          <linearGradient id="dg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#3affb0"/><stop offset="1" stop-color="#0f9a64"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 4C50 4 12 56 12 92a38 38 0 0 0 76 0C88 56 50 4 50 4Z" fill="url(#dg)" opacity=".92"/>
+        <ellipse cx="38" cy="78" rx="11" ry="16" fill="#fff" opacity=".25"/>
+      </svg>
+      <div class="hero-badge">
+        <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4Z"/></svg></span>
+        <span><b>Exclusivo para</b><small>Profissionais da Saúde</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNERS ============ -->
+<section class="partners" id="tecnologia">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Parceria Inovadora</div>
+      <h2 class="section-title">A EurON Pro é fruto de uma <span class="accent">parceria inovadora</span></h2>
+      <p>O CBDose é um assistente posológico desenvolvido pela Eurofarma para apoiar a prática médica. Em poucos cliques, calcule doses diárias totais, frações por tomada e visualize a volumetria exata para o preenchimento da receita, tanto para protocolos adultos quanto pediátricos.</p>
+    </div>
+    <div class="partner-logos">
+      <div class="partner">eurofarma</div>
+      <div class="partner">momenta</div>
+      <div class="partner">Genfar</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="features" id="recursos">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Recursos Premium</div>
+      <h2 class="section-title">Mais Precisão e Segurança na <span class="accent">Rotina do Seu Consultório</span></h2>
+      <p>Otimize o tempo de consulta com tabelas de referência automatizadas e orientações claras de dispensação.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Protocolos Adulto e Pediátrico</h3>
+        <p>Alterne facilmente entre perfis de pacientes para ajustar as necessidades específicas de cada caso.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+        <h3>Cálculo de Dose Customizado</h3>
+        <p>Selecione miligramagem padrão ou defina a dose total exata que o paciente deve ingerir em 24h.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h11M4 7l3-3M4 7l3 3M20 17H9M20 17l-3-3M20 17l-3 3"/></svg></div>
+        <h3>Conversão Automática em mL</h3>
+        <p>Reduza o risco de erros de cálculo com a simulação visual da gotejagem necessária e o volume exato por aspiração.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/></svg></div>
+        <h3>Emissão de Orientação em PDF</h3>
+        <p>Gere um documento claro e detalhado para ajudar o paciente ou cuidador a seguir o tratamento à risca em casa.</p>
+      </div>
+    </div>
+    <div class="center-cta">
+      <a class="btn btn-primary" href="#">Acessar a Plataforma <span class="arrow">→</span></a>
+      <small>Acesso exclusivo sob inscrição para profissionais e acadêmicos da saúde.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECHNICAL INFO ============ -->
+<section>
+  <div class="wrap tech-grid">
+    <div class="molecule">
+      <svg width="200" height="200" viewBox="0 0 200 200" fill="none" stroke="#3affb0" stroke-width="2.5" opacity=".9">
+        <circle cx="100" cy="60" r="9" fill="#0a2018"/><circle cx="140" cy="90" r="9" fill="#0a2018"/>
+        <circle cx="140" cy="130" r="9" fill="#0a2018"/><circle cx="100" cy="155" r="9" fill="#0a2018"/>
+        <circle cx="60" cy="130" r="9" fill="#0a2018"/><circle cx="60" cy="90" r="9" fill="#0a2018"/>
+        <circle cx="100" cy="25" r="7" fill="#0a2018"/>
+        <path d="M100 60L140 90M140 90v40M140 130l-40 25M100 155l-40-25M60 130V90M60 90l40-30M100 60V25"/>
+      </svg>
+    </div>
+    <div>
+      <div class="eyebrow">Informação Técnica</div>
+      <h2 class="section-title">Visão Clara de <span class="accent">Concentrações e Apresentações</span></h2>
+      <p style="color:var(--muted);margin-top:16px;font-size:15.5px">Esqueça as contas manuais complexas. A ferramenta CBDose traz o mapeamento completo das apresentações de Canabidiol Eurofarma (de 20mg/mL a 200mg/mL), permitindo que você visualize instantaneamente o total de miligramas por frasco (30mL) e adeque a melhor opção ao bolso e ao tempo de tratamento do paciente.</p>
+      <div class="conc-grid">
+        <div class="conc"><b>20<span> mg/mL</span></b><small>600 MG / 30 ML</small></div>
+        <div class="conc"><b>50<span> mg/mL</span></b><small>1500 MG / 30 ML</small></div>
+        <div class="conc"><b>100<span> mg/mL</span></b><small>3000 MG / 30 ML</small></div>
+        <div class="conc"><b>200<span> mg/mL</span></b><small>6000 MG / 30 ML</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COVERAGE ============ -->
+<section>
+  <div class="wrap">
+    <div class="coverage-card">
+      <div>
+        <div class="eyebrow">Cobertura Nacional</div>
+        <h2 class="section-title">Suporte à Medicina Canabinoide<br>de <span class="accent">Norte a Sul do Brasil</span></h2>
+        <p class="lead">Disponível para médicos de todas as regiões do país, o CBDose funciona de forma 100% online e responsiva, seja no computador do consultório em grandes centros ou no smartphone durante visitas hospitalares. Uma solução tecnológica que acompanha as demandas da medicina moderna com a governança e a segurança de dados que a LGPD exige.</p>
+        <a class="btn btn-primary" href="#">Criar Minha Conta no EurON Pro <span class="arrow">→</span></a>
+        <div class="coverage-foot">
+          <span><i class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></i> Não armazena dados pessoais identificáveis dos pacientes.</span>
+          <span><i class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></i> Ferramenta gratuita e restrita à classe médica.</span>
+        </div>
+      </div>
+      <div class="check-list">
+        <span><i class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></i> 100% online e responsivo</span>
+        <span><i class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></i> Conforme LGPD</span>
+        <span><i class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></i> Validação profissional</span>
+        <span><i class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></i> Cálculo local e instantâneo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="section-title">Perguntas Frequentes sobre<br><span class="accent">EurON Pro e CBDose</span></h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>O que é a EurON Pro? <span class="chev">▾</span></summary>
+        <p>A EuronPro é um ecossistema digital avançado focado no conhecimento e atualização em saúde para médicos, residentes e estudantes. A plataforma oferece ferramentas dinâmicas de estudo, como modelos de Anatomia em 3D interativos, módulos divididos por especialidades, biblioteca digital e o assistente de cálculo posológico CBDose.</p>
+      </details>
+      <details>
+        <summary>O acesso à plataforma é gratuito? <span class="chev">▾</span></summary>
+        <p>Sim. O acesso é 100% gratuito e exclusivo para profissionais e acadêmicos da área da saúde, mediante cadastro e validação.</p>
+      </details>
+      <details>
+        <summary>Quais apresentações de Canabidiol Eurofarma estão mapeadas na ferramenta CBDose? <span class="chev">▾</span></summary>
+        <p>A ferramenta mapeia as apresentações de 20mg/mL, 50mg/mL, 100mg/mL e 200mg/mL, todas em frascos de 30mL, com o total de miligramas por frasco calculado automaticamente.</p>
+      </details>
+      <details>
+        <summary>A plataforma sugere uma conduta clínica ou diagnóstico para o meu paciente? <span class="chev">▾</span></summary>
+        <p>Não. A CBDose é uma ferramenta de apoio ao cálculo posológico. A decisão clínica, o diagnóstico e a prescrição são de responsabilidade exclusiva do médico.</p>
+      </details>
+      <details>
+        <summary>O que é o CBDose e como ele ajuda a minha rotina clínica? <span class="chev">▾</span></summary>
+        <p>O CBDose é um assistente posológico digital que calcula doses diárias, frações por tomada e a conversão exata em mL/gotas, agilizando o preenchimento da receita com segurança.</p>
+      </details>
+      <details>
+        <summary>O CBDose possui suporte para pediatria? <span class="chev">▾</span></summary>
+        <p>Sim. A ferramenta permite alternar entre protocolos adulto e pediátrico, ajustando o cálculo às necessidades específicas de cada perfil de paciente.</p>
+      </details>
+      <details>
+        <summary>Posso imprimir as orientações de dosagem para entregar ao paciente? <span class="chev">▾</span></summary>
+        <p>Sim. É possível gerar um documento em PDF claro e detalhado com as orientações de uso para o paciente ou cuidador seguir o tratamento corretamente em casa.</p>
+      </details>
+      <details>
+        <summary>A ferramenta armazena os dados de saúde dos meus pacientes? <span class="chev">▾</span></summary>
+        <p>Não. O cálculo é realizado localmente e a ferramenta não armazena dados pessoais identificáveis dos pacientes, em conformidade com a LGPD.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Auto-resize the iframe to content height (works when same-origin, e.g. DAM asset on same domain) -->
+<script>
+  (function(){
+    function postHeight(){
+      try{ parent.postMessage({cbdoseHeight:document.documentElement.scrollHeight},'*'); }catch(e){}
+    }
+    window.addEventListener('load',postHeight);
+    window.addEventListener('resize',postHeight);
+    document.addEventListener('toggle',postHeight,true);
+  })();
+</script>
+</body>
+</html>
